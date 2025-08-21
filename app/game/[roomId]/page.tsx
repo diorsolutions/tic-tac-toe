@@ -5,7 +5,6 @@ import { useParams, useSearchParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/components/ui/use-toast";
 import {
   User,
   Copy,
@@ -16,6 +15,7 @@ import {
   Trophy,
   Sparkles,
 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 type Player = {
   id: string;
@@ -63,8 +63,8 @@ export default function GamePage() {
   const playerIdRef = useRef<string>("");
 
   useEffect(() => {
-    // Connect to WebSocket server
-    const ws = new WebSocket(`ws://localhost:3001`);
+    const wsUrl = process.env.NEXT_PUBLIC_WS_URL || "ws://localhost:3001";
+    const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 
     ws.onopen = () => {
@@ -110,6 +110,22 @@ export default function GamePage() {
     };
 
     ws.onclose = () => {
+      setIsConnected(false);
+      // WebSocket connection closed, attempting to reconnect...
+      console.log(
+        "[v0] WebSocket connection closed, attempting to reconnect..."
+      );
+      setTimeout(() => {
+        if (wsRef.current?.readyState === WebSocket.CLOSED) {
+          // Reconnect logic can be added here if needed
+          console.log("[v0] Connection lost, please refresh the page");
+        }
+      }, 3000);
+    };
+
+    ws.onerror = (error) => {
+      // WebSocket error handling
+      console.log("[v0] WebSocket error:", error);
       setIsConnected(false);
     };
 
@@ -180,7 +196,9 @@ export default function GamePage() {
   };
 
   const copyRoomLink = async () => {
-    const link = `${window.location.origin}?join=${roomId}`;
+    const link = `${
+      window.location.origin
+    }/game/${roomId}?username=${encodeURIComponent("Friend")}&owner=false`;
     await navigator.clipboard.writeText(link);
     setCopied(true);
     toast({
@@ -243,7 +261,7 @@ export default function GamePage() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-8 animate-fade-in">
           <div className="relative inline-block">
-            <h1 className="text-5xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text animate-gradient">
+            <h1 className="text-5xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient">
               ✨ Tic Tac Tangle ✨
             </h1>
             <div className="absolute -top-2 -right-2 animate-spin-slow">
@@ -271,7 +289,7 @@ export default function GamePage() {
             variant={isConnected ? "default" : "destructive"}
             className={`text-sm px-4 py-1 ${
               isConnected
-                ? "animate-pulse bg-green-200 text-black font-semibold text-[15px]"
+                ? "animate-pulse bg-green-500"
                 : "animate-bounce bg-red-500"
             }`}
           >
@@ -337,7 +355,6 @@ export default function GamePage() {
                     : "bg-white/5"
                 }`}
               >
-                {/* Matn uchun oddiy p */}
                 <p
                   className={`font-bold text-lg ${
                     currentPlayerData?.symbol === gameState.currentPlayer &&
@@ -363,11 +380,6 @@ export default function GamePage() {
                     ? "🏁 Match Over"
                     : "🎮 Game Over"}
                 </p>
-
-                {/* Agar loading spinner bo‘lsa, uni alohida div ichida chiqaring */}
-                <div className="flex items-center justify-center mt-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
-                </div>
               </div>
             </CardContent>
           </Card>
@@ -387,7 +399,8 @@ export default function GamePage() {
                     </div>
                   </div>
                   <h2 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient mb-4">
-                    🏆 {gameState.matchWinner.username} Wins! 🏆
+                    🏆 {gameState.matchWinner.username.replace(/'/g, "&#39;")}{" "}
+                    Wins! 🏆
                   </h2>
                   <p className="text-white text-xl mb-6 animate-fade-in">
                     🎊 Congratulations! Champion of the Tournament! 🎊
@@ -507,7 +520,7 @@ export default function GamePage() {
                       ) : (
                         <span className="flex items-center justify-center gap-2">
                           <Zap className="w-5 h-5 text-yellow-400 animate-spin" />
-                          {gameState.currentPlayer}'s Turn
+                          {gameState.currentPlayer}&apos;s Turn
                         </span>
                       )}
                     </p>

@@ -1,35 +1,59 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Users, Plus } from "lucide-react"
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Users, Plus } from "lucide-react";
 
 export default function HomePage() {
-  const [selectedOption, setSelectedOption] = useState<"create" | "join" | null>(null)
-  const [username, setUsername] = useState("")
-  const [roomId, setRoomId] = useState("")
+  const searchParams = useSearchParams();
+  const [selectedOption, setSelectedOption] = useState<
+    "create" | "join" | null
+  >(null);
+  const [username, setUsername] = useState("");
+  const [roomId, setRoomId] = useState("");
+
+  useEffect(() => {
+    const joinRoomId = searchParams.get("join");
+    if (joinRoomId) {
+      setSelectedOption("join");
+      setRoomId(joinRoomId.toUpperCase());
+    }
+  }, [searchParams]);
 
   const handleCreateRoom = () => {
-    if (!username.trim()) return
+    if (!username.trim()) return;
     // Generate random room ID
-    const newRoomId = Math.random().toString(36).substring(2, 8).toUpperCase()
-    window.location.href = `/game/${newRoomId}?username=${encodeURIComponent(username)}&owner=true`
-  }
+    const newRoomId = Math.random().toString(36).substring(2, 8).toUpperCase();
+    window.location.href = `/game/${newRoomId}?username=${encodeURIComponent(
+      username
+    )}&owner=true`;
+  };
 
   const handleJoinRoom = () => {
-    if (!username.trim() || !roomId.trim()) return
-    window.location.href = `/game/${roomId}?username=${encodeURIComponent(username)}&owner=false`
-  }
+    if (!username.trim() || !roomId.trim()) return;
+    window.location.href = `/game/${roomId}?username=${encodeURIComponent(
+      username
+    )}&owner=false`;
+  };
 
   if (!selectedOption) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold text-white">✨ Tic Tac Tangle ✨</h1>
+            <h1 className="text-4xl font-bold text-white">
+              ✨ Tic Tac Tangle ✨
+            </h1>
             <p className="text-purple-200">Choose your adventure</p>
           </div>
 
@@ -43,7 +67,9 @@ export default function HomePage() {
                   <Plus className="w-6 h-6 text-white" />
                 </div>
                 <CardTitle className="text-white">Create New Room</CardTitle>
-                <CardDescription className="text-purple-200">Start a new game and invite friends</CardDescription>
+                <CardDescription className="text-purple-200">
+                  Start a new game and invite friends
+                </CardDescription>
               </CardHeader>
             </Card>
 
@@ -56,22 +82,28 @@ export default function HomePage() {
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <CardTitle className="text-white">Join Existing Room</CardTitle>
-                <CardDescription className="text-purple-200">Enter a room code to join a game</CardDescription>
+                <CardDescription className="text-purple-200">
+                  Enter a room code to join a game
+                </CardDescription>
               </CardHeader>
             </Card>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-4">
       <Card className="w-full max-w-md bg-white/10 border-white/20 backdrop-blur-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-white">{selectedOption === "create" ? "Create New Room" : "Join Room"}</CardTitle>
+          <CardTitle className="text-white">
+            {selectedOption === "create" ? "Create New Room" : "Join Room"}
+          </CardTitle>
           <CardDescription className="text-purple-200">
-            {selectedOption === "create" ? "Enter your username to create a room" : "Enter your username and room code"}
+            {selectedOption === "create"
+              ? "Enter your username to create a room"
+              : "Enter your username and room code"}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -112,8 +144,13 @@ export default function HomePage() {
               Back
             </Button>
             <Button
-              onClick={selectedOption === "create" ? handleCreateRoom : handleJoinRoom}
-              disabled={!username.trim() || (selectedOption === "join" && !roomId.trim())}
+              onClick={
+                selectedOption === "create" ? handleCreateRoom : handleJoinRoom
+              }
+              disabled={
+                !username.trim() ||
+                (selectedOption === "join" && !roomId.trim())
+              }
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
             >
               {selectedOption === "create" ? "Create Room" : "Join Room"}
@@ -122,5 +159,5 @@ export default function HomePage() {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
