@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Users, Plus } from "lucide-react";
 
-export default function HomePage() {
+function HomePageContent() {
   const searchParams = useSearchParams();
   const [selectedOption, setSelectedOption] = useState<
     "create" | "join" | null
@@ -159,5 +159,28 @@ export default function HomePage() {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-6">
+        <div className="text-center space-y-2">
+          <h1 className="text-4xl font-bold text-white">
+            ✨ Tic Tac Tangle ✨
+          </h1>
+          <p className="text-purple-200">Loading...</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <HomePageContent />
+    </Suspense>
   );
 }

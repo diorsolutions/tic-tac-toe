@@ -261,7 +261,7 @@ export default function GamePage() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-8 animate-fade-in">
           <div className="relative inline-block">
-            <h1 className="text-5xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient">
+            <h1 className="text-5xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text  animate-gradient">
               ✨ Tic Tac Tangle ✨
             </h1>
             <div className="absolute -top-2 -right-2 animate-spin-slow">
