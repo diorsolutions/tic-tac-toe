@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Tic Tac Toe }} Diorsolutions",
+  title: "Tic Tac Toe || Diorsolutions",
   description: "Created with Genius",
   generator: "DiorSolutions",
 };
