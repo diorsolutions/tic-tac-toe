@@ -358,31 +358,30 @@ export default function GamePage() {
                     : "bg-white/5"
                 }`}
               >
-                <div
-                  className={`font-bold text-lg ${
-                    currentPlayerData?.symbol === gameState.currentPlayer &&
-                    canPlay
-                      ? "text-yellow-400 animate-pulse"
-                      : canPlay
-                      ? "text-purple-200"
-                      : gameState.players.length < 2
-                      ? "text-blue-400 animate-bounce"
-                      : gameState.matchOver
-                      ? "text-red-400"
-                      : "text-gray-400"
-                  }`}
-                >
-                  {currentPlayerData?.symbol === gameState.currentPlayer &&
-                  canPlay
-                    ? "⚡ Sizning yurishingiz!"
-                    : canPlay
-                    ? "⏳ Raqib yurishi kutilmoqda..."
-                    : gameState.players.length < 2
-                    ? "🔍 Raqib kutilmoqda..."
-                    : gameState.matchOver
-                    ? "🏁 O'yin tugadi"
-                    : "🎮 Yutqazdingiz"}
-                </div>
+<div
+  className={`font-bold text-lg ${
+    currentPlayerData?.symbol === gameState.currentPlayer && canPlay
+      ? "text-yellow-400 animate-pulse"
+      : canPlay
+      ? "text-purple-200"
+      : gameState.players.length < 2
+      ? "text-blue-400 animate-bounce"
+      : gameState.matchOver
+      ? "text-red-400"
+      : "text-gray-400"
+  }`}
+>
+  {currentPlayerData?.symbol === gameState.currentPlayer && canPlay
+    ? "⚡ Sizning yurishingiz!"
+    : canPlay
+    ? "⏳ Raqib yurishi kutilmoqda..."
+    : gameState.players.length < 2
+    ? "🔍 Raqib kutilmoqda..."
+    : gameState.matchOver
+    ? "🏁 O'yin tugadi"
+    : "🎮 Yutqazdingiz"}
+</div>
+
               </div>
             </CardContent>
           </Card>

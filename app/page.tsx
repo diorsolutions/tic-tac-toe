@@ -51,10 +51,10 @@ function HomePageContent() {
       <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-6">
           <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold text-white">
-              ✨ Tic Tac Tangle ✨
+            <h1 className="text-4xl font-bold my-3 text-white">
+              ✨ Tic Tac Toc Tec 🤪✨
             </h1>
-            <p className="text-purple-200">Choose your adventure</p>
+            <p className="text-purple-200">Bo'limni tanlang..!</p>
           </div>
 
           <div className="space-y-4">
@@ -66,9 +66,11 @@ function HomePageContent() {
                 <div className="mx-auto w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-2">
                   <Plus className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-white">Create New Room</CardTitle>
+                <CardTitle className="text-white">
+                  Yangi xona yaratish
+                </CardTitle>
                 <CardDescription className="text-purple-200">
-                  Start a new game and invite friends
+                  Yangi o'yinni boshlang va do'stlaringizni taklif qiling
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -81,9 +83,11 @@ function HomePageContent() {
                 <div className="mx-auto w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mb-2">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-white">Join Existing Room</CardTitle>
+                <CardTitle className="text-white">
+                  Mavjud xonaga kirish
+                </CardTitle>
                 <CardDescription className="text-purple-200">
-                  Enter a room code to join a game
+                  Oʻyinga qoʻshilish uchun xona kodini kiriting
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -98,24 +102,26 @@ function HomePageContent() {
       <Card className="w-full max-w-md bg-white/10 border-white/20 backdrop-blur-sm">
         <CardHeader className="text-center">
           <CardTitle className="text-white">
-            {selectedOption === "create" ? "Create New Room" : "Join Room"}
+            {selectedOption === "create"
+              ? "Yangi Hona yaratish"
+              : "Xonaga qo'shilish"}
           </CardTitle>
           <CardDescription className="text-purple-200">
             {selectedOption === "create"
-              ? "Enter your username to create a room"
-              : "Enter your username and room code"}
+              ? "Xona yaratish uchun foydalanuvchi nomingizni kiriting"
+              : "Foydalanuvchi nomingiz va xona kodingizni kiriting"}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="username" className="text-white">
-              Username
+              Username kriting:
             </Label>
             <Input
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              placeholder="Username kiriting"
               className="bg-white/20 border-white/30 text-white placeholder:text-white/60"
             />
           </div>
@@ -123,13 +129,13 @@ function HomePageContent() {
           {selectedOption === "join" && (
             <div className="space-y-2">
               <Label htmlFor="roomId" className="text-white">
-                Room Code
+                Roomning Kodi
               </Label>
               <Input
                 id="roomId"
                 value={roomId}
                 onChange={(e) => setRoomId(e.target.value.toUpperCase())}
-                placeholder="Enter room code"
+                placeholder="Xona kodini kiriting"
                 className="bg-white/20 border-white/30 text-white placeholder:text-white/60"
               />
             </div>
@@ -153,7 +159,7 @@ function HomePageContent() {
               }
               className="flex-1 bg-orange-500 hover:bg-orange-600 text-white"
             >
-              {selectedOption === "create" ? "Create Room" : "Join Room"}
+              {selectedOption === "create" ? "Xona yaratish" : "Xonaga kirish"}
             </Button>
           </div>
         </CardContent>
@@ -168,7 +174,7 @@ function LoadingFallback() {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold text-white">
-            ✨ Tic Tac Tangle ✨
+            ✨ Tic Tac Toc Tec 🤪✨
           </h1>
           <p className="text-purple-200">Loading...</p>
         </div>

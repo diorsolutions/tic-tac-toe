@@ -5,8 +5,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  description: "Created with Genius",
+  generator: "DiorSolutions",
 };
 
 export default function RootLayout({
@@ -16,8 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-      </head>
+      <head></head>
       <body>
         {children}
         <Toaster />
