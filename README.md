@@ -96,9 +96,38 @@ tic-tac-new/
 
 ```
 ## 🤝 Contributing
-**Pull requests are welcome.
-For major changes, please open an issue first to discuss what you’d like to change.**
 
-## 💡 Inspiration
-**A simple idea — the classic Tic Tac Toe — reimagined with a modern web stack. Perfect as a playground for experimenting with the newest versions of React, Next.js, and Tailwind.**
->>>>>>> bc22c96b613266123a11903a2aa056954efd97ce
+Pull requests are welcome. If you plan a significant change, please open an issue to discuss it first.
+
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feat/amazing-thing`
+3. Commit with clear messages
+4. Push and open a PR
+
+## 🗺️ Roadmap
+
+- [ ] Online multiplayer (WebSockets / Supabase Realtime)
+- [ ] Spectator mode & clean rematch flow
+- [ ] Single-player AI (minimax with heuristics)
+- [ ] PWA (installable + offline support)
+- [ ] Profiles & persistent leaderboard
+- [ ] Theming (light/dark/system) & animation polish
+- [ ] Full a11y pass (keyboard + screen readers)
+- [ ] i18n (EN / UZ)
+
+## 🐛 Issues & Feedback
+
+Spotted a bug or have an idea? Open an issue with steps to reproduce or a short proposal. Clear context = faster fixes.
+
+## ⭐ Support
+
+If this project helps you, please ⭐ the repo. It signals usefulness and guides future work.
+
+## 📄 License
+
+Apache 2.0 License — see `LICENSE` for details.
+
+## 🙌 Acknowledgments
+
+Built with Next.js, React, Tailwind CSS, Radix UI, and Lucide.
+Inspired by the classic Tic Tac Toe—reimagined as a modern playground for experimenting with the latest frontend tooling.
