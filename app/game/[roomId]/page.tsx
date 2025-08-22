@@ -202,27 +202,28 @@ export default function GamePage() {
     await navigator.clipboard.writeText(link);
     setCopied(true);
     toast({
-      title: "Room link copied!",
-      description: "Share this link with your friend to join the game.",
+      title: "Nusxalandi!",
+      description:
+        "Oʻyinga qoʻshilish uchun ushbu havolani doʻstingiz bilan baham koʻring.",
     });
     setTimeout(() => setCopied(false), 2000);
   };
 
   const getCurrentPlayerDisplay = () => {
     if (!gameState.players.find((p) => p.id === playerIdRef.current))
-      return "You";
+      return "Siz";
     return (
       gameState.players.find((p) => p.id === playerIdRef.current)?.username ||
-      "You"
+      "Siz"
     );
   };
 
   const getOpponentDisplay = () => {
     if (!gameState.players.find((p) => p.id !== playerIdRef.current))
-      return "Waiting...";
+      return "Kutilmoqda...";
     return (
       gameState.players.find((p) => p.id !== playerIdRef.current)?.username ||
-      "Waiting..."
+      "Kutilmoqda..."
     );
   };
 
@@ -262,7 +263,7 @@ export default function GamePage() {
         <div className="text-center mb-8 animate-fade-in">
           <div className="relative inline-block">
             <h1 className="text-5xl font-bold text-white mb-2 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 bg-clip-text  animate-gradient">
-              ✨ Tic Tac Tangle ✨
+              ✨ Tic-Tac-Toc-Tec 🤪 ✨
             </h1>
             <div className="absolute -top-2 -right-2 animate-spin-slow">
               <Sparkles className="w-6 h-6 text-yellow-400" />
@@ -270,7 +271,7 @@ export default function GamePage() {
           </div>
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="text-purple-200 text-lg font-semibold">
-              Room: {roomId}
+              Room uchun id: {roomId}
             </span>
             <Button
               size="sm"
@@ -289,7 +290,7 @@ export default function GamePage() {
             variant={isConnected ? "default" : "destructive"}
             className={`text-sm px-4 py-1 ${
               isConnected
-                ? "animate-pulse bg-green-500"
+                ? "animate-pulse bg-green-200 text-black"
                 : "animate-bounce bg-red-500"
             }`}
           >
@@ -321,7 +322,7 @@ export default function GamePage() {
                 {currentPlayerData?.isOwner && (
                   <Badge className="ml-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black animate-shimmer">
                     <Crown className="w-3 h-3 mr-1" />
-                    Owner
+                    ROOM EGASI
                   </Badge>
                 )}
               </CardTitle>
@@ -334,7 +335,9 @@ export default function GamePage() {
               </div>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-purple-200 mb-3 font-semibold">Losses</p>
+              <p className="text-purple-200 mb-3 font-semibold">
+                Yuztazishlar soni
+              </p>
               <div className="flex justify-center gap-2 mb-4">
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div
@@ -355,7 +358,7 @@ export default function GamePage() {
                     : "bg-white/5"
                 }`}
               >
-                <p
+                <div
                   className={`font-bold text-lg ${
                     currentPlayerData?.symbol === gameState.currentPlayer &&
                     canPlay
@@ -371,15 +374,15 @@ export default function GamePage() {
                 >
                   {currentPlayerData?.symbol === gameState.currentPlayer &&
                   canPlay
-                    ? "⚡ Your Turn"
+                    ? "⚡ Sizning yurishingiz!"
                     : canPlay
-                    ? "⏳ Waiting..."
+                    ? "⏳ Raqib yurishi kutilmoqda..."
                     : gameState.players.length < 2
-                    ? "🔍 Waiting for opponent..."
+                    ? "🔍 Raqib kutilmoqda..."
                     : gameState.matchOver
-                    ? "🏁 Match Over"
-                    : "🎮 Game Over"}
-                </p>
+                    ? "🏁 O'yin tugadi"
+                    : "🎮 Yutqazdingiz"}
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -403,7 +406,7 @@ export default function GamePage() {
                     Wins! 🏆
                   </h2>
                   <p className="text-white text-xl mb-6 animate-fade-in">
-                    🎊 Congratulations! Champion of the Tournament! 🎊
+                    🎊 Tabriklaymiz! Turnir chempioni bo'ldingiz! 🎊
                   </p>
                   <div className="relative">
                     <div className="text-8xl mb-6 animate-spin-slow">🏆</div>
@@ -416,7 +419,7 @@ export default function GamePage() {
                     className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white text-xl px-10 py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 group"
                   >
                     <Zap className="w-5 h-5 mr-2 group-hover:animate-spin" />
-                    Start New Tournament
+                    Yangi turnirni boshlang
                   </Button>
                 </div>
               </CardContent>
@@ -489,13 +492,17 @@ export default function GamePage() {
                       <span className="text-red-500 text-2xl animate-pulse">
                         ✕
                       </span>
-                      <span className="text-white font-semibold">Player X</span>
+                      <span className="text-white font-semibold">
+                        O'yinchi: X
+                      </span>
                     </span>
                     <span className="flex items-center gap-2 hover:scale-105 transition-transform">
                       <span className="text-blue-500 text-2xl animate-pulse">
                         ○
                       </span>
-                      <span className="text-white font-semibold">Player O</span>
+                      <span className="text-white font-semibold">
+                        O'yinchi: O
+                      </span>
                     </span>
                   </div>
 
@@ -515,12 +522,12 @@ export default function GamePage() {
                     >
                       {gameState.winner ? (
                         <span className="flex items-center justify-center gap-2">
-                          🎉 {gameState.winner} Wins This Round! 🎉
+                          🎉 {gameState.winner} g'alaba qozondi! 🎉
                         </span>
                       ) : (
                         <span className="flex items-center justify-center gap-2">
                           <Zap className="w-5 h-5 text-yellow-400 animate-spin" />
-                          {gameState.currentPlayer}&apos;s Turn
+                          {gameState.currentPlayer}&apos;ning Yurishi...
                         </span>
                       )}
                     </p>
@@ -532,7 +539,7 @@ export default function GamePage() {
                       className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white text-lg px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 group"
                     >
                       <Star className="w-5 h-5 mr-2 group-hover:animate-spin" />
-                      Play Next Round
+                      Keyingi turni o'ynang
                     </Button>
                   )}
                 </div>
@@ -567,7 +574,9 @@ export default function GamePage() {
               </div>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-purple-200 mb-3 font-semibold">Losses</p>
+              <p className="text-purple-200 mb-3 font-semibold">
+                Yutqazishlar soni
+              </p>
               <div className="flex justify-center gap-2 mb-4">
                 {Array.from({ length: 3 }).map((_, i) => (
                   <div
@@ -587,7 +596,7 @@ export default function GamePage() {
                     : "bg-white/5"
                 }`}
               >
-                <p
+                <div
                   className={`font-bold text-lg ${
                     !opponentData
                       ? "text-blue-400 animate-bounce"
@@ -601,18 +610,18 @@ export default function GamePage() {
                 >
                   {!opponentData ? (
                     <span className="flex items-center justify-center gap-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></div>
-                      Waiting for player...
+                      <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-400"></span>
+                      O'yinchi kutilmoqda...
                     </span>
                   ) : gameState.matchOver ? (
-                    "🏁 Match Over"
+                    "🏁 O'yin tugadi!"
                   ) : opponentData.symbol === gameState.currentPlayer &&
                     canPlay ? (
-                    "⚡ Their Turn"
+                    "⚡ Sizning yurishingiz"
                   ) : (
-                    "🎮 Ready to play!"
+                    "🎮 O'ynashga tayyor!"
                   )}
-                </p>
+                </div>
               </div>
             </CardContent>
           </Card>
