@@ -18,6 +18,26 @@ Lightweight, fast, and fully responsive — with animations, icons, and UI compo
 
 ---
 
+## Let's see 😉
+
+**Create && Login excited room!**
+
+<img width="1907" height="977" alt="image" src="https://github.com/user-attachments/assets/7e5b407c-6556-4f69-a387-e548c878eef8" />
+
+**Waiting logic to join player via invite limk!**
+
+<img width="1904" height="972" alt="image" src="https://github.com/user-attachments/assets/eb7973bd-e8e8-414d-947c-e52803355494" />
+
+**After join new player via invite link let's play with advanced logic!**
+
+<img width="1920" height="985" alt="image" src="https://github.com/user-attachments/assets/41227957-963f-4f16-83d1-e5124f1d3f8c" />
+
+**After 3 times wins, let's celebration!**
+
+<img width="1903" height="979" alt="image" src="https://github.com/user-attachments/assets/2b679f55-64cf-498f-a634-68832c061bb1" />
+
+---
+
 ## 🛠 Tech Stack  
 
 - ⚡ **Next.js** `15.2.4`  
